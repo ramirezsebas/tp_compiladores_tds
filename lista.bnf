@@ -1,0 +1,55 @@
+Dada una lista de palabras se pide retornar la lista pero intercalando las
+palabras desde el final y desde el inicio. 
+
+Ejemplo: Hoy puede que llueva, se retorna llueva Hoy que puede.
+
+
+oracion -> oracion " " palabra
+oracion -> palabra 
+oracion -> EOL 
+
+palabra -> palabra letra 
+palabra -> letra
+
+letra ->  a                                                          
+letra ->  b                                                          
+letra -> ...                                                     
+letra ->  z
+
+-----------------------------------------------------------------------------
+
+Tiene recursion por la izquerda? Si
+
+oracion -> palabra R1 
+oracion -> EOL
+R1 -> " " palabra R1 
+R1 -> E
+
+palabra -> letra R2                 palabra.x = letra.x || R2.x
+R2 -> letra R2                      R2.x = letra.x || R2.x
+R2 -> E                             R2.x = " "
+
+letra -> a | b | ... | z            letra.x = "a"
+
+-----------------------------------------------------------------------------
+
+Tiene factor comnun? No
+
+-----------------------------------------------------------------------------
+
+Conjunto Primero
+
+oracion -> palabra R1 | EOL         P(oracion) = P(palabra R1) U P(EOL) = { a, b, c, ..., z } U {EOL} = { a, b, c, ..., z, EOL} 
+R1 -> " " palabra R1 | E            P(R1) = P(" " palabra R1) U P(E) = { " " } U { E } = { " ", E }
+palabra -> letra R2                 P(palabra) = P(letra R2) = { a, b, c, ..., z }
+R2 -> letra R2 | E                  P(R2) = P(letra R2) U P(E) = { a, b, c,..., z } U { E } = { a, b, c, ..., z, E }
+
+letra -> a | b | ... | z            P(letra) = P(a) U ... U P(z) = { a, b, c,... ,z }
+
+
+
+
+
+
+
+
