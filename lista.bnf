@@ -1,20 +1,20 @@
 Dada una lista de palabras se pide retornar la lista pero intercalando las
 palabras desde el final y desde el inicio. 
-
+ 
 Ejemplo: Hoy puede que llueva, se retorna llueva Hoy que puede.
 
 
-oracion -> oracion " " palabra
-oracion -> palabra 
-oracion -> EOL 
+oracion -> oracion " " palabra oracion.x = oracion.x || " " || palabra.x 
+oracion -> palabra             oracion.x = palabra.x 
+oracion -> EOL                 oracion.x = EOL
 
-palabra -> palabra letra 
-palabra -> letra
+palabra -> palabra letra      palabra.x = palabra.x || letra.x
+palabra -> letra              palabra.x = letra.x
 
-letra ->  a                                                          
-letra ->  b                                                          
-letra -> ...                                                     
-letra ->  z
+letra ->  a                   letra.x = "a"                                       
+letra ->  b                   letra.x = "b"                          
+letra -> ...                      ....                      
+letra ->  z                   letra.x = "z"
 
 -----------------------------------------------------------------------------
 
