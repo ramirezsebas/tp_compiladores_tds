@@ -6,7 +6,7 @@ Ejemplo: Hoy puede que llueva, se retorna llueva Hoy que puede.
 
 oracion -> palara_inicio oracion palabra_final      oracion.x = palabra_inicio.x ||  oracion.x || palabra_final.x
 oracion -> " "                                      oracion.x = " "
-oracion -> palabra                                  oracion.x = palabra.x 
+oracion -> " " palabra " "                          oracion.x = palabra.x 
 oracion -> EOL                                      oracion.x = EOL
 
 palabra_inicio -> palabra                           palabra_inicio.x = palabra.x
