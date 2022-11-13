@@ -17,7 +17,9 @@ class Tds {
 
   String texto() {
     String x;
-    x = palabra() + f1();
+    String y = palabra();
+    String z = f1();
+    x = "$z$y";
     return x;
   }
 
@@ -25,7 +27,10 @@ class Tds {
     String x;
     if (input() == " ") {
       match(" ");
-      x = "${texto()}${palabra_final()} ";
+      String y = palabra_final();
+      String z = texto();
+      x = "$z$y";
+
       return x;
     } else {
       return "";
