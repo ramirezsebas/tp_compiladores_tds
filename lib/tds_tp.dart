@@ -1,4 +1,17 @@
+import 'dart:math' as Math;
+
 class Tds {
+// 1 2 3 4 5 6
+// 6 1 5 2 4 3
+
+// 6 1 2 3 4 5
+// 6 1 5 2 3 4
+// 6 1 5 2 4 3
+// 1 2 3 4 5
+// 5 1 4 2 3
+
+//t -> init t fin | e            t.x = fin().x init().x t().x
+
   final String _entrada;
   int _posicion = 0;
 
@@ -13,17 +26,59 @@ class Tds {
 
   String get currentChar => _entrada[_posicion];
 
+  List<String> palabras = [];
+
+  bool notFinished = true;
+
+  int n = 0;
+
+  List<String> S(String entrada) {
+    String pal = palabra();
+    if (notFinished) {
+      palabras.add(pal);
+      espacio();
+      n++;
+      S(entrada);
+    }
+    ordernar(palabras);
+    n--;
+    return palabras;
+  }
+
+  ordernar(List<String> palabras) {
+    double lenMid = palabras.length / 2;
+    if (n > lenMid.floor()) {
+      palabras.insert((2 * (palabras.length - n)), palabras.removeLast());
+    }
+  }
+
+  espacio() {
+    if (_posicion == length) {
+      notFinished = false;
+      return;
+    } else if (currentChar == " ") {
+      match(" ");
+      return " ";
+    }
+  }
+
   String palabra() {
     String x;
 
-    x = letra() + r2();
-
-    return x;
+    if (_posicion == length) {
+      notFinished = false;
+      return "";
+    } else {
+      x = letra() + r2();
+      return x;
+    }
   }
 
   String r2() {
     String x;
-    if (currentChar == "a" ||
+    if (_posicion == length) {
+      return "";
+    } else if (currentChar == "a" ||
         currentChar == "b" ||
         currentChar == "c" ||
         currentChar == "d" ||
@@ -52,7 +107,7 @@ class Tds {
       x = letra() + r2();
       return x;
     }
-    return " ";
+    return "";
   }
 
   void match(String terminal) {

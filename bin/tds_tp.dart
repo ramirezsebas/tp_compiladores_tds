@@ -1,12 +1,13 @@
 import 'package:tds_tp/tds_tp.dart' show Tds;
 
 void main(List<String> arguments) {
-  final String input = "hoy puede que llueva";
+  final String input = "a b c";
 
   Tds tds = Tds(entrada: input);
 
   try {
-    print(tds.palabra());
+    List<String> out = tds.S(input);
+    print(out);
   } catch (e) {
     print(e);
   }

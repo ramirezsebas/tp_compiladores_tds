@@ -3,11 +3,11 @@ palabras desde el final y desde el inicio.
  
 Ejemplo: Hoy puede que llueva, se retorna llueva Hoy que puede.
 
-
-oracion -> palara_inicio oracion palabra_final      oracion.x = palabra_inicio.x ||  oracion.x || palabra_final.x
-oracion -> " "                                      oracion.x = " "
+tds -> oracion										print(oracion.x)
+oracion -> palara_inicio ' ' oracion ' ' palabra_final      oracion.x = palabra_final.x || palabra_inicio.x ||  oracion.x
+oracion -> E                                      oracion.x = " "
 oracion -> palabra                                  oracion.x = palabra.x 
-oracion -> EOL                                      oracion.x = EOL
+
 
 palabra_inicio -> palabra                           palabra_inicio.x = palabra.x
 palabra_final -> palabra                            palabra_final.x = palabra.x
@@ -23,3 +23,15 @@ letra -> ...                                            ....
 letra ->  z                                         letra.x = "z"
 
 -----------------------------------------------------------------------------
+
+t -> p t p | p | e
+
+t -> p F1 | e 
+F1 -> t p | e 	
+p -> l R1 		
+R1 -> p | e 	
+l -> a~z
+
+texto -> palabra | ' ' texto | e
+
+palabra -> 

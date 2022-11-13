@@ -4,17 +4,17 @@ palabras desde el final y desde el inicio.
 Ejemplo: Hoy puede que llueva, se retorna llueva Hoy que puede.
 
 
-oracion -> oracion " " palabra oracion.x = oracion.x || " " || palabra.x 
-oracion -> palabra             oracion.x = palabra.x 
-oracion -> EOL                 oracion.x = EOL
+oracion -> oracion " " palabra 		oracion.x = oracion.x || " " || palabra.x 
+oracion -> palabra             		oracion.x = palabra.x 
+oracion -> EOL                 		oracion.x = EOL
 
-palabra -> palabra letra      palabra.x = palabra.x || letra.x
-palabra -> letra              palabra.x = letra.x
+palabra -> palabra letra      		palabra.x = palabra.x || letra.x
+palabra -> letra              		palabra.x = letra.x
 
-letra ->  a                   letra.x = "a"                                       
-letra ->  b                   letra.x = "b"                          
-letra -> ...                      ....                      
-letra ->  z                   letra.x = "z"
+letra ->  a                   		letra.x = "a"                                       
+letra ->  b                   		letra.x = "b"                          
+letra -> ...                      		....                      
+letra ->  z                   		letra.x = "z"
 
 -----------------------------------------------------------------------------
 
@@ -48,8 +48,22 @@ letra -> a | b | ... | z            P(letra) = P(a) U ... U P(z) = { a, b, c,...
 
 
 
+--------------------------------------------------------------------------------
+t -> p_r F1             t.x = 
+F1 -> t p_r | p_r         F1.x = 
+p_r -> p F2             p_r.x = 
+F2 -> ' ' | e             F2.x = 
+p -> l F3                 p.x = 
+F3 -> p | e             F3.x = 
+l -> [a~z]                 l.x =
 
 
 
-
+BNF	 						Regla semántica 						Esquema de traducción
+S -> palabra espacio S		S.x = palabra.x + espacio.x + S.x		palabra espacio S {ordenar()}
+S -> palabra				S.x = palabra.x
+palabra -> letra r2			palabra.x = letra.x + r2.x
+r2 -> letra r2 | e			r2.x = letra.x + r2.x
+espacio -> ' ' espacio | e	espacio.x = ' ' + espacio.x || e
+letra -> [a-z]				letra.x = [a-z]
 
