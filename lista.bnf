@@ -20,10 +20,10 @@ letra ->  z                   letra.x = "z"
 
 Tiene recursion por la izquerda? Si
 
-oracion -> palabra R1 
-oracion -> EOL
-R1 -> " " palabra R1 
-R1 -> E
+oracion -> palabra R1               oracion.x = palabra.x || R1.x
+oracion -> "."                      oracion.x = "."
+R1 -> " " palabra R1                R1.x = " " || palabra.x || R1.x
+R1 -> E                             
 
 palabra -> letra R2                 palabra.x = letra.x || R2.x
 R2 -> letra R2                      R2.x = letra.x || R2.x
@@ -45,6 +45,129 @@ palabra -> letra R2                 P(palabra) = P(letra R2) = { a, b, c, ..., z
 R2 -> letra R2 | E                  P(R2) = P(letra R2) U P(E) = { a, b, c,..., z } U { E } = { a, b, c, ..., z, E }
 
 letra -> a | b | ... | z            P(letra) = P(a) U ... U P(z) = { a, b, c,... ,z }
+
+
+--------------------------------------
+
+Los Matis
+
+caso 1: p1 p2 p3 p4
+salida 1: p4 p1 p3 p2
+
+caso 2: p1 p2 
+salida 2: p2 p1
+
+BNF
+
+texto -> p_r texto p_r | p_r p_r | e
+p_r -> p ' ' | p
+p -> letra p | letra
+
+
+
+BNF
+
+t -> p_r t p_r | p_r p_r | e
+
+t -> pr F1
+F1 -> t p_r | p_r
+
+p_r -> p ' ' | p
+
+p_r -> p F2
+F2 -> ' ' | e
+
+p -> l p | l
+
+p -> l F3
+F3 -> p | e
+
+BNF                     Regla semantica
+
+t -> p_r F1             t.x = 
+F1 -> t p_r | p_r         F1.x = 
+p_r -> p F2             p_r.x = 
+F2 -> ' ' | e             F2.x = 
+p -> l F3                 p.x = 
+F3 -> p | e             F3.x = 
+l -> [a~z]                 l.x =
+
+
+------------------------------------------------
+
+
+BNF
+
+texto -> palabra ' ' texto palabra_final    texto.x = palabra_final.x || " " || palabra.x || texto.x 
+texto -> palabra palabra_final              texto.x = palabraFinal.x || " " || palabra.x  
+texto -> palabra                            texto.x = palabra.x
+
+
+palabra_final -> ' ' palabra                palabra_final.x = " " || palabra.x
+palabra_final -> e                          palabra_final.x = " "
+
+palabra -> palabra letra                    palabra.x = letra.x || palabra.x
+palabra -> letra                            palabra.x = letra.x
+
+letra -> [a~z]                              letra.x = a~z
+
+-----------------------------------------------------------------------------
+texto -> palabra F1                                     texto.x = F1.x || ' ' || palabra.x
+F1 -> ' ' texto palabra_final                           F1.x = palabra_final.x || ' ' || texto.x  
+F1 -> palabra_final                                     F1.x = palabra_final.x
+F1 -> e                                                 F1.x = " "
+
+palabra_final -> ' ' palabra                            palabra_final.x = " " || palabra.x 
+palabra_final -> e                                      palabra_final.x = "" 
+
+palabra -> letra F2                                     palabra.x = letra.x || F2.x
+F2 -> palabra F2                                        F2.x = palabra.x || F2.x
+F2 -> e                                                 F2.x = " "
+
+letra -> [a~z]                                          letra.x = a~z
+
+-----------------------------------------------------------------------------
+texto -> palabra F1                                     P(texto) = P(palabra F1) U {EOL} = {a, b, c, ..., z} U {EOL} = {a, b, c, ..., z, EOL}
+F1 -> ' ' texto palabra_final | palabra_final | e       P(F1) = P(' ' texto palabra_final) U P(palabra_final) U P(e) = { ' ' } U { " ", e }   U { e }
+
+
+palabra_final -> ' ' palabra  | e                       P(palabra_final) = P(' ' palabra) U P(e) = { " " } U { e } = { " ", e }  
+
+palabra -> letra F2                                     P(palabra) = P(letra F2) = { a, b, c, ..., z }
+F2 -> palabra F2 | e                                    P(F2) = P(palabra F2) U P(e) = { a, b, c, ..., z } U { e } = { a, b, c, ..., z, e } 
+
+letra -> [a~z]                                          P(letra) = { a, b, c, ..., z }
+-----------------------------------------------------------------------------
+
+texto -> palabra ' ' texto palabra_final | palabra ' ' palabra | palabra    
+                                P(texto) = P(palabra ' ' texto palabra_final) U P(palabra ' ' palabra) U P(palabra) 
+                                = { a, b, c, ..., z } U { a, b, c, ..., z } U { a, b, c, ..., z } = { a, b, c, ..., z } 
+
+palabra_final -> ' ' palabra | e            P(palabra_final) = P(' ' palabra) U { e } = { " " } U { e } = { " ", e }                          
+
+palabra -> letra F                          P(palabra) = P(letra F) = { a, b, c, ..., z }
+F -> palabra F | e                          P(F) = P(palabra F) U P(e) 
+                                                        = { a, b, c, ..., z } U { e } = { a, b, c, ..., z, e }
+
+letra -> [a~z]                              P(letra)= {a, b, c, ..., z}
+
+------------------------------------------------------------------------------------
+Hoy puede que llueva
+
+Hoy " " puede " " que " " llueva
+
+texto -> palabra espacio texto palabra_final    texto.x = palabra_final.x || " " || palabra.x || texto.x
+texto -> palabra                                texto.x = palabra.x
+    
+espacio -> " "                                  espacio.x = " "
+    
+palabra_final -> espacio palabra                palabra_final.x = " " || palabra.x
+palabra_final -> e                              palabra_final.x = ""
+    
+palabra -> palabra letra                        palabra.x = letra.x || palabra.x
+palabra -> letra                                palabra.x = letra.x
+    
+letra -> [a~z]                                  letra.x = a~z
 
 
 

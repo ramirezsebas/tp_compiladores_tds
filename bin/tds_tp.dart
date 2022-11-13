@@ -1,4 +1,4 @@
-import 'package:tds_tp/tds_tp.dart' show Tds;
+import 'package:tds_tp/tds_tp.dart';
 
 void main(List<String> arguments) {
   final String input = "hoy puede que llueva";
@@ -6,7 +6,7 @@ void main(List<String> arguments) {
   Tds tds = Tds(entrada: input);
 
   try {
-    print(tds.palabra());
+    tds.lista();
   } catch (e) {
     print(e);
   }

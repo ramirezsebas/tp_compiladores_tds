@@ -1,0 +1,33 @@
+lista -> texto                                  print(texto)
+
+texto -> palabra F1                             texto.x = F1.x || palabra.x
+F1 -> " " texto palabra_final                   F1.x =  texto.x || palabra_final.x || " " 
+F1 -> e                                         F1.x = ""
+    
+palabra_final -> " " palabra                    palabra_final.x = palabra.x || " "
+palabra_final -> e                              palabra_final.x = ""
+    
+palabra -> letra R1                             palabra.x = letra.x || R1.x
+R1 -> letra R1                                  R1.x = letra.x || R1.x
+R1 -> e                                         R1.x = " "
+    
+letra -> a                                      letra.x = "a"
+letra -> b                                      letra.x = "b"
+    ...
+letra -> z                                      letra.x = "z"  
+
+
+_________________________________________________________________________________________________
+
+texto -> palabra F1                           P(texto) = P(palabra F1) = {a~z}
+F1 -> " " texto palabra_final | e             P(F1) = P(" " texto palabra_final) U P(e) = {" "} U {e} = {" ", e}
+                                   
+palabra_final -> " " palabra | e              P(palabra_final) =  P(" " palabra) U P(e) = {" "} U {e} = {" ", e} 
+    
+palabra -> letra R1                           P(palabra) = P(letra R1) = {a~z}
+R1 -> letra R1  | e                           P(R1) = P(letra) U P(e) = {a~z} U {e} = {a~z,e}
+
+
+    
+letra -> [a~z]                                P(letra) = P(a) U P(b) U ... P(z) 
+                                                                = {a} U {b} U ... U {z} = {a~z}

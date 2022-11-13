@@ -1,0 +1,70 @@
+BNF - TP de Compiladores
+hoy
+palabra -> hoy
+
+hoy puede
+palabra " " texto palabra_final -> Hoy " " texto palabra_final -> Hoy " " palabra palabra_final -> Hoy " " puede e -> Hoy " " puede
+
+hoy puede que 
+palabra " " texto palabra_final -> hoy " " texto palabra_final -> hoy " " palabra palabra_final -> hoy " " puede palabra_final ->
+hoy " " puede palabra_final -> hoy " " puede " " palabra -> hoy " " puede " " que ->
+
+hoy puede que llueva
+palabra " " texto palabra_final -> hoy " " texto palabra_final -> hoy " " palabra " " texto palabra_final palabra_final ->
+hoy " " palabra " " texto palabra_final palabra_final -> hoy " " puede " " texto palabra_final palabra_final ->
+hoy " " puede " " texto palabra_final palabra_final -> hoy " " puede " " palabra palabra_final palabra_final ->
+hoy " " puede " " palabra palabra_final palabra_final -> hoy " " puede " " que palabra_final palabra_final ->
+hoy " " puede " " que palabra_final palabra_final -> hoy " " puede " " que " " palabra palabra_final ->
+hoy " " puede " " que " " palabra palabra_final -> hoy " " puede " " que " " llueva palabra_final ->
+hoy " " puede " " que " " llueva palabra_final -> hoy " " puede " " que " " llueva e ->
+hoy " " puede " " que " " llueva e -> hoy " " puede " " que " " llueva 
+
+-----------------------------------------------------------------------------------------------------------------------
+texto -> palabra " " texto palabra_final        texto.x = palabra_final.x || " " || palabra.x || texto.x
+texto -> palabra                                texto.x = palabra.x
+    
+    
+palabra_final -> " " palabra                    palabra_final.x = " " || palabra.x
+palabra_final -> e                              palabra_final.x = ""
+    
+palabra -> palabra letra                        palabra.x = letra.x || palabra.x
+palabra -> letra                                palabra.x = letra.x
+    
+letra -> a                                      letra.x = "a"
+letra -> b                                      letra.x = "b"
+    ...
+letra -> z                                      letra.x = "z"
+
+-------------------------------------------------------------------------------------------------------------
+lista -> texto                                  print(texto)
+
+texto -> palabra F1                             texto.x = palabra.x || F1.x
+F1 -> " " texto palabra_final                   F1.x =  palabra_final.x || " " || texto.x 
+F1 -> e                                         F1.x = ""
+    
+palabra_final -> " " palabra                    palabra_final.x = " " || palabra.x
+palabra_final -> e                              palabra_final.x = "."
+    
+palabra -> letra R1                             palabra.x = letra.x || R1.x
+R1 -> letra                                     R1.x = letra.x
+R1 -> e                                         R1.x = " "
+    
+letra -> a                                      letra.x = "a"
+letra -> b                                      letra.x = "b"
+    ...
+letra -> z                                      letra.x = "z"                               
+
+______________________________________________________
+
+texto -> palabra F1                           P(texto) = P(palabra F1) = {a~z}
+F1 -> " " texto palabra_final | e             P(F1) = P(" " texto palabra_final) U P(e) = {" "} U {e} = {" ", e}
+                                   
+palabra_final -> " " palabra | e              P(palabra_final) =  P(" " palabra) U P(e) = {" "} U {e} = {" ", e} 
+    
+palabra -> letra R1                           P(palabra) = P(letra R1) = {a~z}
+R1 -> letra R1  | e                           P(R1) = P(letra) U P(e) = {a~z} U {e} = {a~z,e}
+
+
+    
+letra -> [a~z]                                P(letra) = P(a) U P(b) U ... P(z) 
+                                                                = {a} U {b} U ... U {z} = {a~z}

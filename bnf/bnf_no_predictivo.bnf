@@ -1,0 +1,16 @@
+lista -> texto                                  print(texto)
+
+texto -> palabra " " texto palabra_final        texto.x = palabra_final.x || " " || palabra.x || texto.x
+texto -> palabra                                texto.x = palabra.x
+    
+    
+palabra_final -> " " palabra                    palabra_final.x = palabra.x || " "
+palabra_final -> e                              palabra_final.x = ""
+    
+palabra -> palabra letra                        palabra.x = letra.x || palabra.x
+palabra -> letra                                palabra.x = letra.x
+    
+letra -> a                                      letra.x = "a"
+letra -> b                                      letra.x = "b"
+    ...
+letra -> z                                      letra.x = "z"
