@@ -31,3 +31,5 @@ R1 -> letra R1  | e                           P(R1) = P(letra) U P(e) = {a~z} U 
     
 letra -> [a~z]                                P(letra) = P(a) U P(b) U ... P(z) 
                                                                 = {a} U {b} U ... U {z} = {a~z}
+
+

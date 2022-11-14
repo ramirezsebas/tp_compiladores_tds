@@ -1,0 +1,43 @@
+
+------------------------------------------------------------------------------------------------------------------------------
+a b c d
+
+texto -> texto " " palabra                      texto.x = palabra.x || " " || texto.x
+texto -> palabra                                texto.x = palabra.x
+
+palabra -> palabra letra                        palabra.x = letra.x || palabra.x
+palabra -> letra                                palabra.x = letra.x
+
+letra -> [a~z]                                  letra.x = letra.x
+
+-------------------------------
+
+texto -> palabra r1                             texto.x = palabra.y || " " || r1.z
+r1 -> " " palabra r1                            r1.x = palabra.y || r1.z
+r1 -> e                                         r1.x = ""
+
+palabra -> letra r2                           P(palabra) = P(letra R1) = {a~z}
+r2 -> letra r2  | e                           P(R1) = P(letra) U P(e) = {a~z} U {e} = {a~z,e}
+
+letra -> [a~z]                                  letra.x = letra.x
+
+
+------------------------------------------------------------------------------------------------------------------------------
+a b c d
+
+texto -> texto " " palabra | palabra                    texto.x = palabra.x || " " || texto.x
+
+palabra -> palabra letra                        palabra.x = letra.x || palabra.x
+palabra -> letra                                palabra.x = letra.x
+
+letra -> [a~z]                                  letra.x = letra.x
+
+----
+texto -> palabra r1                             texto.x = palabra.y || " " || r1.z
+r1 -> " " palabra r1                            r1.x = palabra.y || r1.z
+r1 -> e                                         r1.x = ""
+
+palabra -> letra r2                           P(palabra) = P(letra R1) = {a~z}
+r2 -> letra r2  | e                           P(R1) = P(letra) U P(e) = {a~z} U {e} = {a~z,e}
+
+letra -> [a~z]                                  letra.x = letra.x

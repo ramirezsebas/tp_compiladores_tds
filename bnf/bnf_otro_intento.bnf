@@ -1,0 +1,49 @@
+
+
+___________________________________________________________________________
+___________________________________________________________________________
+___________________________________________________________________________
+___________________________________________________________________________
+
+
+lista -> texto                                  print(texto)
+
+texto -> texto2 palabra                         texto.x = palabra.x || texto2.x
+texto -> palabra                                texto.x = palabra.x
+
+texto2 -> palabra F1                            texto2.x = F1.x || palabra.x
+F1 -> texto | palabra                       texto2.x = palabra.x   
+    
+palabra -> letra R1                             palabra.x = letra.x || R1.x
+R1 -> letra R1                                  R1.x = letra.x || R1.x
+R1 -> e                                         R1.x = " "
+    
+letra -> a                                      letra.x = "a"
+letra -> b                                      letra.x = "b"
+    ...
+letra -> z                                      letra.x = "z"  
+
+___________________________________________________________________________
+___________________________________________________________________________
+___________________________________________________________________________
+___________________________________________________________________________
+
+
+lista -> texto                                  print(texto)
+
+texto -> texto2 palabra                         texto.x = palabra.x || texto2.x
+texto -> palabra                                texto.x = palabra.x
+
+texto2 -> palabra F1                            texto2.x = F1.x || palabra.x
+F1 -> texto | palabra                       texto2.x = palabra.x   
+    
+palabra -> letra R1                             palabra.x = letra.x || R1.x
+R1 -> letra R1                                  R1.x = letra.x || R1.x
+R1 -> e                                         R1.x = " "
+    
+letra -> a                                      letra.x = "a"
+letra -> b                                      letra.x = "b"
+    ...
+letra -> z                                      letra.x = "z"  
+
+
