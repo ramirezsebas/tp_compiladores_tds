@@ -1,18 +1,18 @@
 BNF                                             Reglas Semantica
 --------------------------------------------------------------------------------------------
-lista -> texto                                  print(texto)
+lista -> texto                                  print(texto.x)
 
 texto -> palabra F1                             texto.x = F1.z || palabra.y
 
-F1 -> " " texto palabra_final                   F1.x =  texto.z || palabra_final.y || " " 
+F1 -> " " texto palabra_final                   F1.x =  texto.z || palabra_final.y 
 F1 -> e                                         F1.x = ""
     
-palabra_final -> " " palabra                    palabra_final.x = palabra.x || " "
+palabra_final -> " " palabra                    palabra_final.x = palabra.y
 palabra_final -> e                              palabra_final.x = ""
     
 palabra -> letra R1                             palabra.x = letra.y || R1.z
 
-R1 -> letra R1                                  R1.x = letra.x || R1.x
+R1 -> letra R1                                  R1.x = letra.y || R1.z
 R1 -> e                                         R1.x = " "
     
 letra -> a                                      letra.x = "a"
@@ -31,7 +31,7 @@ F1 -> " " texto palabra_final | e             P(F1) = P(" " texto palabra_final)
 palabra_final -> " " palabra | e              P(palabra_final) =  P(" " palabra) U P(e) = {" "} U {e} = {" ", e} 
     
 palabra -> letra R1                           P(palabra) = P(letra R1) = {a, b, ... , z}
-R1 -> letra R1  | e                           P(R1) = P(letra) U P(e) = {a, b, ... , z} U {e} = {a~z,e}
+R1 -> letra R1  | e                           P(R1) = P(letra R1) U P(e) = {a, b, ... , z} U {e} = {a~z,e}
 
 
 letra -> a | b | ... | z                      P(letra) = P(a) U P(b) U ... P(z) 

@@ -1,7 +1,7 @@
 import 'package:tds_tp/tds_tp.dart';
 
 void main(List<String> arguments) {
-  final String input = "a b c d";
+  final String input = "olimpia campeon del mundo";
 
   Tds tds = Tds(entrada: input);
 
