@@ -59,11 +59,54 @@ l -> [a~z]                 l.x =
 
 
 
-BNF	 						Regla semántica 						Esquema de traducción
-S -> palabra espacio S		S.x = palabra.x + espacio.x + S.x		palabra espacio S {ordenar()}
+BNF	 						Regla semántica
+S -> palabra espacio S		S.x = palabra.x + espacio.x + S.x
 S -> palabra				S.x = palabra.x
 palabra -> letra r2			palabra.x = letra.x + r2.x
 r2 -> letra r2 | e			r2.x = letra.x + r2.x
 espacio -> ' ' espacio | e	espacio.x = ' ' + espacio.x || e
 letra -> [a-z]				letra.x = [a-z]
 
+BNF	 						Regla semántica 						Esquema de traducción
+S -> palabra R1				S.x = palabra.x + R1.x 					palabra R1 {ordenar()}
+R1 -> espacio S | e			R1.x = espacio.x + S.x || e				espacio S | e
+palabra -> letra r2			palabra.x = letra.x + r2.x
+r2 -> letra r2 | e			r2.x = letra.x + r2.x
+espacio -> ' ' espacio | e	espacio.x = ' ' + espacio.x || e
+letra -> [a-z]				letra.x = [a-z]
+
+BNF	 						Regla semántica							Esquema de traducción
+S -> palabra R1														{palabras.add(palabra) R1() ordenar()}
+R1 -> espacio S
+R1 -> e						R1.x = ''
+palabra -> letra r2			palabra.x = letra.x || r2.x
+r2 -> letra r2				r2.x = letra.x || r2.x
+r2 -> e						r2.x = ''
+espacio -> ' ' espacio		espacio.x = ' ' || espacio.x
+espacio -> e				espacio.x = ''
+letra -> [a-z]				letra.x = [a-z]
+
+Conjuntos primeros
+S -> palabra R1				P(S) = P(palabra R1) = {a, b, c, ..., z}
+R1 -> espacio S | e			P(R1) = P(espacio S) U P(e) = { ' ' } U { e } = { ' ', e }
+palabra -> letra r2			P(palabra) = P(letra r2) = {a, b, c, ..., z}
+r2 -> letra r2 | e			P(r2) = P(letra r2) U P(e) = {a, b, c, ..., z} U { e } = {a, b, c, ..., z, e}
+espacio -> ' ' espacio | e	P(espacio) = P(' ' espacio) U P(e) = { ' ' } U { e } = { ' ', e }
+letra -> [a-z]				P(letra) = P([a-z]) = {a, b, c, ..., z}
+
+
+6 texto
+
+6 1 
+
+
+texto(){
+	espacio();
+	texto2();
+}
+
+texto2(){
+	palabra();
+	espacio();
+	texto();
+}

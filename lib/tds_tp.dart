@@ -20,11 +20,20 @@ class Tds {
   })  : _entrada = entrada,
         _posicion = 0;
 
+  String output = "";
+
   int get length => _entrada.length;
 
   String get entrada => _entrada;
 
-  String get currentChar => _entrada[_posicion];
+  String input() {
+    if (_posicion < entrada.length) {
+      return entrada[_posicion];
+    } else {
+      notFinished = false;
+      return "";
+    }
+  }
 
   List<String> palabras = [];
 
@@ -32,17 +41,24 @@ class Tds {
 
   int n = 0;
 
-  List<String> S(String entrada) {
+  S() {
     String pal = palabra();
+    palabras.add(pal);
+    n++;
     if (notFinished) {
-      palabras.add(pal);
-      espacio();
-      n++;
-      S(entrada);
+      r1();
     }
     ordernar(palabras);
     n--;
-    return palabras;
+  }
+
+  r1() {
+    if (input() == " ") {
+      espacio();
+      S();
+    } else {
+      return;
+    }
   }
 
   ordernar(List<String> palabras) {
@@ -50,72 +66,62 @@ class Tds {
     if (n > lenMid.floor()) {
       palabras.insert((2 * (palabras.length - n)), palabras.removeLast());
     }
+    output = "$output${palabras[palabras.length - n]}${n == 1 ? "" : " "}";
   }
 
   espacio() {
-    if (_posicion == length) {
-      notFinished = false;
-      return;
-    } else if (currentChar == " ") {
+    if (input() == " ") {
       match(" ");
+      espacio();
       return " ";
+    } else {
+      return;
     }
   }
 
   String palabra() {
     String x;
-
-    if (_posicion == length) {
-      notFinished = false;
-      return "";
-    } else {
-      x = letra() + r2();
-      return x;
-    }
+    x = letra() + r2();
+    return x;
   }
 
   String r2() {
     String x;
-    if (_posicion == length) {
-      return "";
-    } else if (currentChar == "a" ||
-        currentChar == "b" ||
-        currentChar == "c" ||
-        currentChar == "d" ||
-        currentChar == "e" ||
-        currentChar == "f" ||
-        currentChar == "g" ||
-        currentChar == "h" ||
-        currentChar == "i" ||
-        currentChar == "j" ||
-        currentChar == "k" ||
-        currentChar == "l" ||
-        currentChar == "m" ||
-        currentChar == "n" ||
-        currentChar == "o" ||
-        currentChar == "p" ||
-        currentChar == "q" ||
-        currentChar == "r" ||
-        currentChar == "s" ||
-        currentChar == "t" ||
-        currentChar == "u" ||
-        currentChar == "v" ||
-        currentChar == "w" ||
-        currentChar == "x" ||
-        currentChar == "y" ||
-        currentChar == "z") {
+    if (input() == "a" ||
+        input() == "b" ||
+        input() == "c" ||
+        input() == "d" ||
+        input() == "e" ||
+        input() == "f" ||
+        input() == "g" ||
+        input() == "h" ||
+        input() == "i" ||
+        input() == "j" ||
+        input() == "k" ||
+        input() == "l" ||
+        input() == "m" ||
+        input() == "n" ||
+        input() == "o" ||
+        input() == "p" ||
+        input() == "q" ||
+        input() == "r" ||
+        input() == "s" ||
+        input() == "t" ||
+        input() == "u" ||
+        input() == "v" ||
+        input() == "w" ||
+        input() == "x" ||
+        input() == "y" ||
+        input() == "z") {
       x = letra() + r2();
       return x;
+    } else {
+      return "";
     }
-    return "";
   }
 
   void match(String terminal) {
-    if (_posicion >= _entrada.length) {
-      return;
-    }
-
-    if (currentChar != terminal) {
+    if (input() != terminal) {
       throw Exception(
           "Error de Sintaxis: se esperaba '$terminal' y se encontró '${entrada[_posicion]}'");
     }
@@ -124,107 +130,107 @@ class Tds {
 
   String letra() {
     String x;
-    if (currentChar == "a") {
+    if (input() == "a") {
       match("a");
       x = "a";
       return x;
-    } else if (currentChar == "b") {
+    } else if (input() == "b") {
       match("b");
       x = "b";
       return x;
-    } else if (currentChar == "c") {
+    } else if (input() == "c") {
       match("c");
       x = "c";
       return x;
-    } else if (currentChar == "d") {
+    } else if (input() == "d") {
       match("d");
       x = "d";
       return x;
-    } else if (currentChar == "e") {
+    } else if (input() == "e") {
       match("e");
       x = "e";
       return x;
-    } else if (currentChar == "f") {
+    } else if (input() == "f") {
       match("f");
       x = "f";
       return x;
-    } else if (currentChar == "g") {
+    } else if (input() == "g") {
       match("g");
       x = "g";
       return x;
-    } else if (currentChar == "h") {
+    } else if (input() == "h") {
       match("h");
       x = "h";
       return x;
-    } else if (currentChar == "i") {
+    } else if (input() == "i") {
       match("i");
       x = "i";
       return x;
-    } else if (currentChar == "j") {
+    } else if (input() == "j") {
       match("j");
       x = "j";
       return x;
-    } else if (currentChar == "k") {
+    } else if (input() == "k") {
       match("k");
       x = "k";
       return x;
-    } else if (currentChar == "l") {
+    } else if (input() == "l") {
       match("l");
       x = "l";
       return x;
-    } else if (currentChar == "m") {
+    } else if (input() == "m") {
       match("m");
       x = "m";
       return x;
-    } else if (currentChar == "n") {
+    } else if (input() == "n") {
       match("n");
       x = "n";
       return x;
-    } else if (currentChar == "ñ") {
+    } else if (input() == "ñ") {
       match("ñ");
       x = "ñ";
       return x;
-    } else if (currentChar == "o") {
+    } else if (input() == "o") {
       match("o");
       x = "o";
       return x;
-    } else if (currentChar == "p") {
+    } else if (input() == "p") {
       match("p");
       x = "p";
       return x;
-    } else if (currentChar == "q") {
+    } else if (input() == "q") {
       match("q");
       x = "q";
       return x;
-    } else if (currentChar == "r") {
+    } else if (input() == "r") {
       match("r");
       x = "_r";
       return x;
-    } else if (currentChar == "s") {
+    } else if (input() == "s") {
       match("s");
       x = "s";
       return x;
-    } else if (currentChar == "t") {
+    } else if (input() == "t") {
       match("t");
       x = "t";
       return x;
-    } else if (currentChar == "u") {
+    } else if (input() == "u") {
       match("u");
       x = "u";
       return x;
-    } else if (currentChar == "v") {
+    } else if (input() == "v") {
       match("v");
       x = "v";
       return x;
-    } else if (currentChar == "w") {
+    } else if (input() == "w") {
       match("w");
       x = "w";
       return x;
-    } else if (currentChar == "x") {
+    } else if (input() == "x") {
       match("x");
       x = "x";
       return x;
-    } else if (currentChar == "y") {
+    } else if (input() == "y") {
       match("y");
       x = "y";
       return x;
