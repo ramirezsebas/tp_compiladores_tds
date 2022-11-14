@@ -1,13 +1,13 @@
 lista -> texto                                  print(texto)
 
-texto -> palabra " " texto palabra_final        texto.x = palabra_final.x || " " || palabra.x || texto.x
+texto -> palabra " " texto palabra_final        texto.x = palabra_final.y || " " || palabra.z || texto.x
 texto -> palabra                                texto.x = palabra.x
     
     
-palabra_final -> " " palabra                    palabra_final.x = palabra.x || " "
+palabra_final -> " " palabra                    palabra_final.x = palabra.y || " "
 palabra_final -> e                              palabra_final.x = ""
     
-palabra -> palabra letra                        palabra.x = letra.x || palabra.x
+palabra -> palabra letra                        palabra.x = letra.y || palabra.z
 palabra -> letra                                palabra.x = letra.x
     
 letra -> a                                      letra.x = "a"
