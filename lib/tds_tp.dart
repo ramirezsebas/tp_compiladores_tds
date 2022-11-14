@@ -29,7 +29,7 @@ class Tds {
       match(" ");
       String y = palabra_final();
       String z = texto();
-      x = "$z$y";
+      x = "$z$y ";
 
       return x;
     } else {
@@ -50,8 +50,10 @@ class Tds {
 
   String palabra() {
     String x;
+    String y = letra();
+    String z = r1();
 
-    x = letra() + r1();
+    x = y + z;
 
     return x;
   }
@@ -84,7 +86,10 @@ class Tds {
         input() == "x" ||
         input() == "y" ||
         input() == "z") {
-      x = letra() + r1();
+      String y = letra();
+      String z = r1();
+      x = y + z;
+
       return x;
     } else {
       return " ";

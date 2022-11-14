@@ -4,10 +4,9 @@ void main(List<String> arguments) {
   final String input = "a b c d";
 
   Tds tds = Tds(entrada: input);
-  NewTds newTds = NewTds(entrada: input);
 
   try {
-    newTds.lista();
+    tds.lista();
   } catch (e) {
     print(e);
   }
